@@ -1,16 +1,35 @@
 " Don't try to be vi compatible
 set nocompatible
 
+" Everything should be English.
+language messages en_US.UTF-8
+set langmenu=en_US.UTF-8
+
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
+" Load bundles from the "bundle" sub directories instead of one large plugin dir.
+set runtimepath^=~/.vim
+silent! call pathogen#runtime_append_all_bundles()
+silent! call pathogen#helptags()
 
 " Turn on syntax highlighting
 syntax on
 
-" For plugins to load correctly
-filetype plugin indent on
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+
+" Yank into and put from the Windows clipboard.
+set clipboard=unnamed
+
+" File-type highlighting and configuration.
+" Run :filetype (without args) to see what you may have
+" to turn on yourself, or just set them all to be sure.
+filetype on
+filetype plugin on
+filetype indent on
+
+set autoindent smartindent
 
 " TODO: Pick a leader key
 " let mapleader = ","
@@ -56,8 +75,23 @@ set hidden
 " Rendering
 set ttyfast
 
-" Status bar
+" Always show status line.
 set laststatus=2
+
+function! InsertStatuslineColor(mode)
+  if a:mode == 'i'
+    highlight StatusLine guibg=green
+  elseif a:mode == 'r'
+    highlight StatusLine guibg=yellow
+  else
+    highlight StatusLine guibg=red
+  endif
+endfunction
+
+autocmd InsertEnter * call InsertStatuslineColor(v:insertmode)
+autocmd InsertLeave * highlight StatusLine guibg=#c2bfa5
+
+set statusline=%<%f\ %h%y\ [%{&ff}]%m%r\ %#warningmsg#%{SyntasticStatuslineFlag()}%*%=%-14.(%l,%c%V%)\ %P
 
 " Last line
 set showmode
@@ -77,6 +111,14 @@ map <leader><space> :let @/=''<cr> " clear search
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
+
+" Mouse in all modes
+set mouse=a
+
+set history=1000
+set matchtime=0
+" The “Press ENTER or type command to continue” prompt is jarring and usually unnecessary. You can shorten command-line text and other info tokens with.
+set shortmess=atI
 
 " Textmate holdouts
 
