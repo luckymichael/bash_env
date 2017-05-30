@@ -62,18 +62,18 @@ fi
 
 # python
 # Set Anaconda Paths (in your ~/.bashrc)
-export CONDA_ROOT="/usr/local/anaconda"
-export PATH=$CONDA_ROOT/bin:$PATH
-export CONDA_ENVS_PATH=/raid3/gou/anaconda/envs:$CONDA_ROOT/envs
-source activate py3
+#export CONDA_ROOT="/usr/local/anaconda"
+#export PATH=$CONDA_ROOT/bin:$PATH
+#export CONDA_ENVS_PATH=/raid3/gou/anaconda/envs:$CONDA_ROOT/envs
+#source activate py3
 
 
-source .aliases.sh
+
 #export LD_LIBRARY_PATH=/opt/local/lib:/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
-export LD_RUN_PATH=/home/gou/local/lib:/home/gou/local/lib64${LD_RUN_PATH:+:$LD_RUN_PATH}
-export LD_LIBRARY_PATH=/home/gou/local/lib:/home/gou/local/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
-export PATH=/home/gou/local/bin${PATH:+:$PATH}
-export CPATH=/home/gou/local/include${CPATH:+:$CPATH}
-export C_INCLUDE_PATH=/home/gou/local/include${C_INCLUDE_PATH:+:$C_INCLUDE_PATH}
-export CPLUS_INCLUDE_PATH=/home/gou/local/include${CPLUS_INCLUDE_PATH:+:$CPLUS_INCLUDE_PATH}
-export OBJC_INCLUDE_PATH=/home/gou/local/include${OBJC_INCLUDE_PATH:+:$OBJC_INCLUDE_PATH}
+export LD_RUN_PATH=~/local/lib${LD_RUN_PATH:+:$LD_RUN_PATH}
+export LD_LIBRARY_PATH=~/local/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+export PATH=~/local/bin${PATH:+:$PATH}
+export CPATH=~/local/include${CPATH:+:$CPATH}
+export C_INCLUDE_PATH=~/local/include${C_INCLUDE_PATH:+:$C_INCLUDE_PATH}
+export CPLUS_INCLUDE_PATH=~/local/include${CPLUS_INCLUDE_PATH:+:$CPLUS_INCLUDE_PATH}
+export OBJC_INCLUDE_PATH=~/local/include${OBJC_INCLUDE_PATH:+:$OBJC_INCLUDE_PATH}

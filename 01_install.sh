@@ -1,6 +1,4 @@
-
-
-download_dir=`pwd`
+download_dir=~/Downloads
 install_dir=~/local
 
 
@@ -40,6 +38,11 @@ libgd='https://github.com/libgd/libgd/releases/download/gd-2.2.4/libgd-2.2.4.tar
 magics='https://software.ecmwf.int/wiki/download/attachments/3473464/Magics-2.32.0-Source.tar.gz?api=v2'
 cdo='https://code.zmaw.de/attachments/download/14387/cdo-current.tar.gz'
 nccmp='http://prdownloads.sourceforge.net/nccmp/nccmp-1.8.2.1.tar.gz?download'
+lapack='http://www.netlib.org/lapack/lapack-3.7.0.tgz'
+antlr='http://www.antlr2.org/download/antlr-2.7.7.tar.gz'
+udunits='ftp://ftp.unidata.ucar.edu/pub/udunits/udunits-2.1.20.tar.gz'
+gsl='http://mirror.us-midwest-1.nexcess.net/gnu/gsl/gsl-latest.tar.gz'
+nco='https://github.com/nco/nco/archive/4.6.6.tar.gz'
 
 
 dextract $zlib_link zlib
@@ -85,7 +88,7 @@ make && make install
 cd ..
 
 dextract $proj4 proj
-CFLAGS=-fPIC ./configure –prefix=$install_dir --enable-static=yes --enable-shared=no
+CFLAGS=-fPIC ./configure -prefix=$install_dir --enable-static=yes --enable-shared=no
 make && make install
 cd ..
 
@@ -99,7 +102,7 @@ CPPFLAGS=-I${install_dir}/include LDFLAGS=-L${install_dir}/lib ./configure --pre
 make check install
 cd ..
 
-conda install swig numpy pango
+#conda install swig numpy pango
 
 dextract $boost boost
 ./bootstrap.sh --with-python=$CONDA_ROOT/bin/python --prefix=$install_dir
@@ -118,44 +121,12 @@ make && make install
 cd ..
 
 dextract $cdo cdo
-./configure --prefix=$install_dir  --with-szlib=$install_dir --with-netcdf=$install_dir --with-jasper=$install_dir --with-hdf5=$install_dir --with-grib_api=$install_dir --with-magics=$install_dir --with-proj=$install_dir
+./configure --prefix=$install_dir  --with-szlib=$install_dir --with-netcdf=$install_dir --with-jasper=$install_dir --with-hdf5=$install_dir --with-grib_api=$install_di --with-proj=$install_dirr  #--with-magics=$install_dir
 make && make install
 cd ..
 
-
-
-##########################################################
-####################### set up git #######################
-##########################################################
-git config --global user.name "Michael Ou"
-git config --global user.email "ougengxin@gmail.com"
-git config --global apply.whitespace nowarn
-#git config --global alias.co checkout
-git config --global credential.helper osxkeychain
-if [ -f ~/.gitconfig ]; then
-  echo '[color]' >> ~/.gitconfig
-  echo 'found ~/.gitconfig'
-else
-  echo '[color]' >  ~/.gitconfig
-fi
-
-echo '    branch = auto' >> ~/.gitconfig
-echo '    diff = auto' >> ~/.gitconfig
-echo '    status = auto' >> ~/.gitconfig
-echo '[color "branch"]' >> ~/.gitconfig
-echo '    current = yellow reverse' >> ~/.gitconfig
-echo '    local = yellow' >> ~/.gitconfig
-echo '    remote = green' >> ~/.gitconfig
-echo '[color "diff"]' >> ~/.gitconfig
-echo '    meta = yellow bold' >> ~/.gitconfig
-echo '    frag = magenta bold' >> ~/.gitconfig
-echo '    old = red bold' >> ~/.gitconfig
-echo '    new = green bold' >> ~/.gitconfig
-echo '[color "status"]' >> ~/.gitconfig
-echo '    added = yellow' >> ~/.gitconfig
-echo '    changed = green' >> ~/.gitconfig
-echo '    untracked = cyan' >> ~/.gitconfig
-
-
-echo '.DS_Store' > ~/.gitexcludes
+dextract $lapack lapack
+cp make.inc.example make.inc
+make all && make install
+cd ..
 

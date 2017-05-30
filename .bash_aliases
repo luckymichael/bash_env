@@ -45,7 +45,7 @@ alias l='ls -CF'
 alias less='less -FSRXc'                    # Preferred 'less' implementation
 alias whence='type -a'                        # where, of a sort
 
-cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
+#cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
 alias ..='cd ../'                           # Go back 1 directory level
 alias ...='cd ../../'                       # Go back 2 directory levels
